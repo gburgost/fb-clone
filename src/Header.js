@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Header.css";
 import SearchIcon from "@material-ui/icons/Search";
 import HomeIcon from "@material-ui/icons/Home";
@@ -11,15 +11,19 @@ import AddIcon from "@material-ui/icons/Add";
 import ForumIcon from "@material-ui/icons/Forum";
 import NotificationsActiveIcon from "@material-ui/icons/NotificationsActive";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { useStateValue } from "./StateProvider";
+
+import { AuthContext } from "./auth/AuthContext";
 
 function Header() {
-  const [{ user }, dispatch] = useStateValue();
+  const { user } = useContext(AuthContext);
 
   return (
     <div className="header">
       <div className="header__left">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/768px-Facebook_Logo_%282019%29.png" />
+        <img
+          alt="Facebook logo"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/768px-Facebook_Logo_%282019%29.png"
+        />
         <div className="header__input">
           <SearchIcon />
           <input type="text" placeholder="Search Facebook" />

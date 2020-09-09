@@ -80,3 +80,13 @@
 .header__right {
   display: flex;
 }
+
+@media screen and (max-width: 764px) {
+  .header__input,
+  .header__center {
+    display: none;
+  }
+  .header__right > button {
+    display: none;
+  }
+}

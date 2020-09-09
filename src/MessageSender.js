@@ -1,16 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./MessageSender.css";
 import { Avatar } from "@material-ui/core";
 import VideocamIcon from "@material-ui/icons/Videocam";
 import SendIcon from "@material-ui/icons/Send";
 import PhotoLibraryIcon from "@material-ui/icons/PhotoLibrary";
 import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
-import { useStateValue } from "./StateProvider";
+
 import db from "./firebase";
 import firebase from "firebase";
+import { AuthContext } from "./auth/AuthContext";
 
 function MessageSender() {
-  const [{ user }, dispatch] = useStateValue();
+  const { user } = useContext(AuthContext);
+
   const [input, setInput] = useState("");
   const [imageUrl, setImageUrl] = useState("");
 

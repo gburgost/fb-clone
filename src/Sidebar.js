@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Sidebar.css";
 import SidebarRow from "./SidebarRow";
 import LocalHospitalIcon from "@material-ui/icons/LocalHospital";
@@ -8,10 +8,10 @@ import ChatIcon from "@material-ui/icons/Chat";
 import StorefrontIcon from "@material-ui/icons/Storefront";
 import VideoLibraryIcon from "@material-ui/icons/VideoLibrary";
 import { ExpandMoreOutlined } from "@material-ui/icons";
-import { useStateValue } from "./StateProvider";
+import { AuthContext } from "./auth/AuthContext";
 
 function Sidebar() {
-  const [{ user }, dispatch] = useStateValue();
+  const { user } = useContext(AuthContext);
 
   return (
     <div className="sidebar">

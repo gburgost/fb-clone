@@ -1,31 +1,46 @@
-import React from "react";
+import React, { useReducer, useEffect } from "react";
 import "./App.css";
-import Header from "./Header";
-import Sidebar from "./Sidebar";
-import Feed from "./Feed";
-import Widgets from "./Widgets";
-import Login from "./Login";
-import { useStateValue } from "./StateProvider";
+
+import { authReducer } from "./auth/authReducer";
+import { AuthContext } from "./auth/AuthContext";
+import { AppRouter } from "./routers/AppRouter";
+
+const init = () => {
+  return (
+    JSON.parse(localStorage.getItem("user")) || {
+      logged: false,
+    }
+  );
+};
 
 function App() {
-  const [{ user }, dispatch] = useStateValue();
+  // const [{ user }, dispatch] = useStateValue();
+  const [user, dispatch] = useReducer(authReducer, {}, init);
+
+  useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(user));
+  }, [user]);
 
   return (
-    <div className="app">
-      {!user ? (
-        <Login />
-      ) : (
-        <>
-          <Header />
+    <AuthContext.Provider value={{ user, dispatch }}>
+      <AppRouter />
+    </AuthContext.Provider>
 
-          <div className="app__body">
-            <Sidebar />
-            <Feed />
-            <Widgets />
-          </div>
-        </>
-      )}
-    </div>
+    // <div className="app">
+    //   {!user ? (
+    //     <Login />
+    //   ) : (
+    //     <>
+    //       <Header />
+
+    //       <div className="app__body">
+    //         <Sidebar />
+    //         <Feed />
+    //         <Widgets />
+    //       </div>
+    //     </>
+    //   )}
+    // </div>
   );
 }
 
