@@ -1,0 +1,16 @@
+.storyReel {
+  display: flex;
+}
+
+@media screen and (max-width: 764px) {
+  .storyReel {
+    width: 100%;
+    overflow-x: scroll;
+    height: 230px;
+  }
+  .storyReel::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+}
